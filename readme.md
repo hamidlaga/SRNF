@@ -53,7 +53,7 @@ Demonstrates how to invert a SRNF map given an initial surface.
 Please refer to the file LICENSE.
 
 ## Contributors
-Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermy, Anuj Srivastava.
+Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermyn, Anuj Srivastava.
 
 ## Contact
 
