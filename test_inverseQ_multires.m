@@ -60,7 +60,7 @@
 % You may need more if dealing with high resolution surfaces. 
 %
 %% Copyright
-%  Author: Hamid Laga (hamid.laga@gmail.com
+%  Author: Hamid Laga (hamid.laga@gmail.com)
 %  Last update: 2022/03/23
 %%
 
