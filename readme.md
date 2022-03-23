@@ -45,8 +45,7 @@ publisher={Morgan \& Claypool Publishers}
 ## How to use the code:
 Scripts are provided to illustrate various usage scenarios. In particular:
 
--- test_inverseQ.m
-Demonstrates how to invert a SRNF map given an initial surface.
+- test_inverseQ.m: Demonstrates how to invert a SRNF map given an initial surface.
 
 
 ## Licence and Copyright
