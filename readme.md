@@ -45,16 +45,23 @@ publisher={Morgan \& Claypool Publishers}
 ## How to use the code:
 Scripts are provided to illustrate various usage scenarios. In particular:
 
-- test_inverseQ.m: Demonstrates how to invert a SRNF map given an initial surface.
+test_inverseQ.m - Demonstrates how to invert a SRNF map given an initial surface.
+test_inverseQ_multires.m - Demonstrates how to invert a SRNF map when no initial surface is available. 
+    In this case, it will start from a sphere. This will require multiscale surfaces. 
+    Also, the sample code will require harmonic basis of the following resolutions and frequencues::
+        8 x 8: LL from 2 to 8
+        16 x 16: LL from 8 to 36
+        25 x 25: LL of 22, 23 and 36
+    You may need more if dealing with high resolution surfaces. 
 
 
 ## Licence and Copyright
 Please refer to the file LICENSE.
 
 ## Contributors
-Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermyn, Anuj Srivastava.
+Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermy, Anuj Srivastava.
 
 ## Contact
 
-For any questions, you can contact `hamid.laga@gmail.com`.
+For any questions, you can contact `hamid.laga@gmail.com`. Note that the code is provided as it is and we may not be able to provide support on how to use it and fixing potential bugs.
 

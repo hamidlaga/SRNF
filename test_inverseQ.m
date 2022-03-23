@@ -1,10 +1,11 @@
 %% README
 % This file demonstrate how to use the SRNF inversion procedure.
+%
+% In this example, we show how to compute the invert of an SRNF map when an
+% initial surface is give. Importantly, the initial surface should be close
+% to the surface we want to recover.
 % 
 % REQUIREMENTS
-% - The code in code/Surface (from Sebastian Kurtek, it is included here)
-%   You may want to check README.rtf on how to use that code.
-%
 % - Harmonic Basis for generic surfaces 
 %   the script for this is testGenerateHarmonicBasis.m, 
 %   Its header contains an explanation on how to use it.
@@ -26,12 +27,6 @@
 %   parameterized. The examples provided here are already parameterized. 
 %   If you want to use your owen surfaces, you need to parameterize them using the
 %   code available at: https://github.com/hamidlaga/SphericalParameterization  
-%
-% - Multiresolution representation using spherical harmonics
-% If you plan to initialize the inversion with a sphere, you need to work with 
-% multiresolution surfaces. The code that generates these multiresolution
-% surfaces is separate from this one. 
-% If will be made available soon. 
 %
 %% Example
 % The script below takes a surface, computes its SRNF and then tries to
@@ -56,7 +51,7 @@
 %        resolution 50 x 50
 %        -- L:the default one is set from 2 to 36. However, for this
 %        example we only need L = [22,23,36]
-%        -- outDir: the output directort where the generated harminic basis
+%        -- outDir: the output directort where the generated harminoc basis
 %        will be save
 %
 %%
@@ -70,11 +65,11 @@ imtool close all;
 
 configure_paths;
 currDir = pwd;
-% drive     = '/Users/hamidlaga/Dropbox/'; % Edit it according to your own settings
-outputDir = './output/';                 % output directory
-dataDir   = './sample_surfaces/';
 
-%% Load the mat file that contains the 5 surfaces and their linear mean
+dataDir   = './sample_surfaces/';
+outputDir = './output/';                 % output directory
+
+%% Load the mat file that contains the surface to invert and the initial surface (for initialization)
 load([dataDir './surfaces.mat'], 'F', 'muF');
 nSurfaces = 1; 
 
@@ -89,7 +84,7 @@ multiResM = zeros(nres, res(1), res(2), 3); % This will hold the multires surfac
 multiResM(1, :,:,:) = resampleSphericalGrid(F, res(1), 0);
 
 %% Parameters
-params.homeDir        = [pwd '/']; % [drive 'Home/Applications/3DShapeStatistics/code/4DStatistics/SRNF/'];        
+params.homeDir        = [pwd '/']; 
 params.surfaceCodeDir = params.homeDir;
 params.currDir        = currDir;
 
@@ -166,7 +161,7 @@ M = f_reconstructed_multires{1};
 % Save the reconstructed surface 
 save([outputDir num2str(1) '.mat'], 'M');
 
-%% Let's measure the reconstruction erros
+%% Let's measure the reconstruction errors
 % The surface as represented by the spherical harmonic basis
 [c_new, f_new] = reconstruct_surfaceR3( mySurf(M_multires{end}), @innerS2, B, res);
 f_hb = permute(reshape( f_new, [3,res(1), res(2)]), [2, 3, 1]);
@@ -183,24 +178,20 @@ subpos = get(hsub,'position');
 subpos(1:2) = subpos(1:2) + 75; 
 subpos(3:4) = 100; 
 uicontrol ('Style','text', 'String', 'Original Surface, with harmonic basis','FontSize', 8, 'Position', subpos);
-  %   title('Original Surface, with harmonic bases');
 dispSurface(f_hb); 
 
 res= params.RES(1, :);
 
 % Original Surface
-% h1 = figure(200); clf; title('Original Surface');
 hsub = subplot(1, 4, 2);
 subpos = get(hsub,'position'); 
 subpos(1:2) = subpos(1:2) + 75; subpos(1) = subpos(1) + 100;
 subpos(3:4) = 100; 
 uicontrol ('Style','text', 'String', 'Original Surface', ...
            'FontSize', 8, 'Position', subpos);
-  %   title('Original Surface, with harmonic bases');
 dispSurface(M_multires{1}); 
 
 % Reconstructed surface
-% h2 = figure(300); clf; title('Reconstructed Surface');
 hsub = subplot(1, 4, 3);
 subpos = get(hsub,'position'); 
 subpos(1:2) = subpos(1:2) + 75; subpos(1) = subpos(1) + 220;
@@ -217,7 +208,6 @@ dispSurface(f_reconstructed_multires{1});
 
 f_reco  = f_reconstructed_multires{params.nres};
 Err = sum((f_hb - f_reco).^2, 3);
-% h   = figure(400); clf; title('Reconstruction error');
 hsub = subplot(1, 4, 4);
 subpos = get(hsub,'position'); 
 subpos(1:2) = subpos(1:2) + 75; subpos(1) = subpos(1) + 320;
