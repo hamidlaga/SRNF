@@ -1,35 +1,27 @@
-%% Make PCA basis and their derivatives
-%
-% Computes linear statistics from registered 3D shapes (spherically
-% parameterized)
-%
-% IMPORTANT
-% You need to setup the paths to where your data is and where the generated
-% PCA basis and their derivatives will be saved
-%
-% Copyright Hamid Laga (hamid.laga@gmail.com)
-%
-% Last update: 2022/03/22
+%% Make PCA basis
+
+% Computes linear statistics from the registered 3D shapes
 %
 
 clear all;
 close all;
 imtool close all;
 
-drive = 'F:/';   
+drive = 'F:/';      %PC
+
 homeDir        = [drive 'Home/Hamid/Work/Applications/3DShapeStatistics/code/'];        
 surfaceCodeDir = [homeDir 'Surface/'];
 currDir        = pwd;
 
-dataDir = [homeDir '../3DModels/MPI-EG2009/multires_surfaces/']; 
-outDir  = './PCABasis_HumanShapesFAUST/';  
+dataDir = [homeDir '../3DModels/MPI-EG2009/multires_surfaces/']; % [homeDir '../3DModels/TOSCA/multi_res/'];
+outDir  = './PCABasis_HumanShapesFAUST/';  % './PCABasis_cat/';  %PCABasisHuman_Res';
 mkdir (outDir);
 outfname =  [outDir 'PCABasisHuman_Res'];
 
-D       = dir([dataDir '*.mat']); 
+D       = dir([dataDir '*.mat']); %  'cat*.mat']);
 
 refIx   = 1;
-res     = [32, 32]; %  [64, 64]; % [128, 128]; % the desired resolution
+res     = [32, 32]; % [32, 32]; %  [64, 64]; % [128, 128]; % the desired resolution
 
 nObjects = numel(D);
 
@@ -43,6 +35,7 @@ M        = center_surface_closed(M, multfact1,A1,Theta);
 [A1, ~, ~] = area_surf_closed(M);
 M = M /sqrt(A1);
 
+% muF = M;
 P1  = M;
 
 [N,~,~] = size(M);
@@ -104,7 +97,7 @@ set(gcf, 'Renderer', 'zbuffer');
 set(gcf, 'Color', [1, 1, 1]);
 
 
-%% doing some reconstruction (to test the result) - uncomment if needed
+%% doing some reconstruction
 % S = Shapes(:, 89);
 % Sn = S - Mu;
 % nModes = size(eigenVectors, 2);
@@ -136,45 +129,46 @@ set(gcf, 'Color', [1, 1, 1]);
 % cameramenu;
 % pause
 
-% % Visualizing the modes of variation (uncomment if needed)
-% for modeId = 1:min(size(eigenVectors, 2), 10),  % Let's visualize 10 modes
-% 
-%     % close all;
-%     eVal  = sqrt(EVals(modeId));        % standard deviation
-% 
-%     f = -2:0.5:2; % [-3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3];
-%     Variations =  f* eVal;
-% 
-%     h = figure(modeId * 1000);
-%     clf;
-%     hold on;
-%     colors = {'.r' ; '.g' ; '.b'; 'xg'; 'xr'};
-%     
-%     shift_x = 1;
-%     for i=1:length(Variations)
-%         sc = Variations(i);
-%         S  = reshape(Mu + sc * eigenVectors(:, modeId), [N, N, 3] ); 
-% 
-%         surface(squeeze(S(:, :, 1)) + shift_x * i, squeeze(S(:, :, 2)), squeeze(S(:, :, 3)));
-%     end   
-%   
-%     axis equal;
-%     cameramenu;
-%     axis off;
-%     
-%     lighting phong;
-%     light('Position',[0 0 1],'Style','local')
-% %    camlight('headlight');
-%     shading 'flat';
-%     set(gcf, 'Renderer', 'zbuffer');
-%     
-% 	% savefig(h, [outDir 'Hamate_mode_' num2str(modeId) '.fig']);
-%     disp('Press any key to visualize the next mode of variation ...');
-%     pause; % (.1)
-%     
-% end
+% the modes of variation
+for modeId = 1:min(size(eigenVectors, 2), 10),  % Let's visualize 10 modes
 
-%% Generating the derivatives
+    % close all;
+    eVal  = sqrt(EVals(modeId));        % standard deviation
+
+    f = -2:0.5:2; % [-3 -2.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 2 2.5 3];
+    Variations =  f* eVal;
+
+    h = figure(modeId * 1000);
+    clf;
+    hold on;
+    colors = {'.r' ; '.g' ; '.b'; 'xg'; 'xr'};
+    
+    shift_x = 1;
+    for i=1:length(Variations)
+        sc = Variations(i);
+        S  = reshape(Mu + sc * eigenVectors(:, modeId), [N, N, 3] ); 
+
+        surface(squeeze(S(:, :, 1)) + shift_x * i, squeeze(S(:, :, 2)), squeeze(S(:, :, 3)));
+    end   
+  
+    axis equal;
+    cameramenu;
+    axis off;
+    
+    lighting phong;
+    light('Position',[0 0 1],'Style','local')
+%    camlight('headlight');
+    shading 'flat';
+    set(gcf, 'Renderer', 'zbuffer');
+    
+	% savefig(h, [outDir 'Hamate_mode_' num2str(modeId) '.fig']);
+    disp('Press any key to visualize the next mode of variation ...');
+    pause; % (.1)
+    
+end
+
+%% saving the PCA basis
+% B = permute(eigenVectors, [2, 1]);
 B = reshape(eigenVectors, [N, N, 3, size(eigenVectors, 2)]);
 B = permute(B, [ 3 1 2 4]);
 B = reshape(B, [3, N*N, size(B, 4)]);
@@ -194,7 +188,7 @@ clear Bn;
 Bu = Bnu(:,:, 2:end); clear Bnu;
 Bv = Bnv(:,:, 2:end);
 
-%% Saving with the derivatings
+
 save([outfname num2str(N) '.mat'], ...
     'B', 'Bu', 'Bv', 'Mu', 'Muu', 'Muv');
 
