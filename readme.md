@@ -59,10 +59,10 @@ The sample code requires harmonic basis of the following resolutions and frequen
 You may need more if you are dealing with high resolution surfaces. 
 
 ## Sample surfaces
-The folder sample_surfaces include exaamples of spherically-parameterized surfaces using this [code](https://github.com/hamidlaga/SphericalParameterization). 
+The folder sample_surfaces include exaamples of spherically-parameterized surfaces using this [code](https://github.com/hamidlaga/SphericalParameterization). However, the original meshes are from [TOSCA](https://people.lu.usi.ch/bronstem/), [SCHREC2007](https://www.semanticscholar.org/paper/SHape-REtrieval-Contest-2007%3A-Watertight-Models-Giorgi-Biasotti/2b5bb396160d11da2bc842b58045704cab70aa8c), [DFAUST](https://dfaust.is.tue.mpg.de/). 
 
 ## Licence and Copyright
-Please refer to the file LICENSE.
+Please refer to the file LICENSE. In short, you are free to use the code for research purposes. For any commercial uses, please contact the authors; see Section "Contact" below.
 
 ## Contributors
 Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermyn, Anuj Srivastava.
