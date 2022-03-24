@@ -62,12 +62,10 @@ You may need more if you are dealing with high resolution surfaces.
 The folder sample_surfaces include exaamples of spherically-parameterized surfaces using this [code](https://github.com/hamidlaga/SphericalParameterization). However, the original meshes are from [TOSCA](https://people.lu.usi.ch/bronstem/), [SCHREC2007](https://www.semanticscholar.org/paper/SHape-REtrieval-Contest-2007%3A-Watertight-Models-Giorgi-Biasotti/2b5bb396160d11da2bc842b58045704cab70aa8c), [DFAUST](https://dfaust.is.tue.mpg.de/). 
 
 ## Licence and Copyright
-Please refer to the file LICENSE. In short, you are free to use the code for research purposes. For any commercial uses, please contact the authors; see Section "Contact" below.
+Please refer to the file LICENSE. In short, you are free to use the code for research purposes. For any commercial uses, please contact the authors; see below.
 
-## Contributors
+## Contributors and Contact
 Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermyn, Anuj Srivastava.
-
-## Contact
 
 For any questions, you can contact `hamid.laga@gmail.com`. Note that the code is provided as it is and we may not be able to provide support on how to use it and fixing potential bugs.
 
