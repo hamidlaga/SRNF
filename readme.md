@@ -52,9 +52,9 @@ This code demonstrates how to invert a SRNF map given an initial surface.
 This code demonstrates how to invert a SRNF map when no initial surface is available. The optimization startswith a unit sphere. The approach operates on multiscale surfaces, which need to be generated using spherical wavelet transforms (a few example surfaces are included. The code will be made available soon). 
 
 The sample code requires harmonic basis of the following resolutions and frequencies (res refers to resolution, LL to frequency):
-        res: 8 x 8: LL from 2 to 8
-        res: 16 x 16: LL from 8 to 36
-        res: 25 x 25: LL of 22, 23 and 36
+        - res: 8 x 8: LL from 2 to 8
+        - res: 16 x 16: LL from 8 to 36
+        - res: 25 x 25: LL of 22, 23 and 36
         
 You may need more if you are dealing with high resolution surfaces. 
 
