@@ -58,6 +58,9 @@ The sample code requires harmonic basis of the following resolutions and frequen
         
 You may need more if you are dealing with high resolution surfaces. 
 
+## Sample surfaces
+The folder sample_surfaces include exaamples of spherically-parameterized surfaces using this [code](https://github.com/hamidlaga/SphericalParameterization). 
+
 ## Licence and Copyright
 Please refer to the file LICENSE.
 
