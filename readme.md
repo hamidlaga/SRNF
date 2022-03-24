@@ -43,23 +43,26 @@ publisher={Morgan \& Claypool Publishers}
 ```
 
 ## How to use the code:
-Scripts are provided to illustrate various usage scenarios. In particular:
+The following scripts are provided to illustrate various usage scenarios. A detailed explanation is provided in the header of each of these scripts. 
 
-test_inverseQ.m - Demonstrates how to invert a SRNF map given an initial surface.
-test_inverseQ_multires.m - Demonstrates how to invert a SRNF map when no initial surface is available. 
-    In this case, it will start from a sphere. This will require multiscale surfaces. 
-    Also, the sample code will require harmonic basis of the following resolutions and frequencues::
-        8 x 8: LL from 2 to 8
-        16 x 16: LL from 8 to 36
-        25 x 25: LL of 22, 23 and 36
-    You may need more if dealing with high resolution surfaces. 
+### test_inverseQ.m
+This code demonstrates how to invert a SRNF map given an initial surface.
 
+### test_inverseQ_multires.m 
+This code demonstrates how to invert a SRNF map when no initial surface is available. The optimization startswith a unit sphere. The approach operates on multiscale surfaces, which need to be generated using spherical wavelet transforms (a few example surfaces are included. The code will be made available soon). 
+
+The sample code requires harmonic basis of the following resolutions and frequencies (res refers to resolution, LL to frequency):
+        res: 8 x 8: LL from 2 to 8
+        res: 16 x 16: LL from 8 to 36
+        res: 25 x 25: LL of 22, 23 and 36
+        
+You may need more if you are dealing with high resolution surfaces. 
 
 ## Licence and Copyright
 Please refer to the file LICENSE.
 
 ## Contributors
-Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermy, Anuj Srivastava.
+Hamid Laga, Sebastian Kurtek, Qian Xie, Ian H. Jermyn, Anuj Srivastava.
 
 ## Contact
 
