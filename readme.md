@@ -58,7 +58,22 @@ The sample code requires harmonic basis of the following resolutions and frequen
         
 You may need more if you are dealing with high resolution surfaces. 
 
-## Sample surfaces
+### test_inverseQ_PCABasis.m 
+This script shows how to invert SRNF maps when PCA basis is available for such class of shapes. Note that this one is class-specific.
+
+### testComputeGeodesics.m
+This script shows how to compute the geodesic between a pair of spatially registered surfaces. 
+
+### testComputeGeodesicsHumanShapes.m
+This script shows how to compute the geodesic between a pair of spatially registered surfaces when PCA basis are available for that class of shapes. Note that this one is class-specific. In this example, we use human shapes.
+
+### testGenerateHarmonicBasis.m
+This script shows how to generate spherical harmonic basis and their derivatives.
+
+### testGeneratePCABasis.m
+This script shows how to generate PCA basis and their derivatives, for a specific class of shapes. This one is class specific.
+
+## Examples of surfaces
 The folder sample_surfaces include exaamples of spherically-parameterized surfaces using this [code](https://github.com/hamidlaga/SphericalParameterization). However, the original meshes are from [TOSCA](https://people.lu.usi.ch/bronstem/), [SCHREC2007](https://www.semanticscholar.org/paper/SHape-REtrieval-Contest-2007%3A-Watertight-Models-Giorgi-Biasotti/2b5bb396160d11da2bc842b58045704cab70aa8c), [DFAUST](https://dfaust.is.tue.mpg.de/). 
 
 ## Licence and Copyright
