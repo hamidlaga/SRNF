@@ -1,7 +1,7 @@
 # SRNF
 ## Numerical Inversion of Square Root Normal Field (SRNF) maps
 
-This code implements the algorithm for the numerical inversion of Square Root Normal Field (SRNF) map, published in           
+This code implements the algorithm for the numerical inversion of Square Root Normal Field (SRNF) maps, published in           
 > [Hamid Laga](https://sites.google.com/view/hamidlaga), Qian Xie, [Ian H Jermyn](https://www.durham.ac.uk/staff/i-h-jermyn/), and [Anuj Srivastava](https://anujsrivastava.com/).
 > [**Numerical inversion of SRNF maps for elastic shape analysis of genus-zero surfaces**](https://ieeexplore.ieee.org/abstract/document/7807327).
 > IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) 39(12), pp.2451-2464 (2017).
@@ -9,7 +9,7 @@ This code implements the algorithm for the numerical inversion of Square Root No
 The program requires Matlab, and has been extensively tested on Windows. It should also run on Mac. 
 It uses some codes written in C, which need to be compiled with mex. Pre-compiled files for Windows (32 and 64) and Mac (32 and 64) are included.  
 
-It is standalone and does not require any setup (apart from having Matlab running on Windows). It uses some third-party codes, 
+It is standalone and does not require any setup (apart from having Matlab). It uses some third-party codes, 
 which are included in this distribution with proper license. 
 
 This code was developed for research purposes and is not meant for commercial use. We expect that the code may have some bugs and issues. However, while we will be happy to answer some questions, we may not be able to provide support in trouble-shooting the code. 
