@@ -1,5 +1,5 @@
 %% README
-% This file demonstrate how to use the SRNF inversion procedure.
+% This script demonstrates how to use the SRNF inversion procedure.
 %
 % In this example, we show how to compute the invert of an SRNF map when an
 % an initial surface is not available. In this case, the initialization will
@@ -164,7 +164,7 @@ uicontrol ('Style','text', 'String', 'Original Surface, with harmonic basis','Fo
   %   title('Original Surface, with harmonic bases');
 dispSurface(f_hb); 
 
-i = params.nres;
+i  = params.nres;
 res= params.RES(i, :);
 
 % Original Surface
@@ -208,40 +208,4 @@ axis equal off;
 cameramenu
 colorbar
 
-% 
-% i = params.nres;
-% 
-% 
-% res= params.RES(i, :);
-% 
-% % Original surface
-% h1 = figure(100); clf; 
-% dispSurface(M_multires{i}); 
-% 
-% % Reconstructed surface
-% h2 = figure(200); clf;
-% dispSurface(f_reconstructed_multires{i}); 
-% 
-% disp('Press anykey to continue ...');
-% pause; % (.1);
-% 
-% 
-% % the original sirface as represented by the spheical harmonic basis
-% h3 = figure(300); clf;
-% dispSurface(f_hb); 
-% 
-% 
-% %% visualize the reconstruction error (if needed)
-% f_reco  = f_reconstructed_multires{params.nres};
-% Err = sum((f_hb - f_reco).^2, 3);
-% h  = figure(400); clf;
-% 
-% surface(squeeze(f_hb(:,:,1)), squeeze(f_hb(:,:,2)), squeeze(f_hb(:,:,3)), Err); %, ...
-% colormap jet;
-% shading interp
-% light; lighting phong; 
-% axis equal off;
-% cameramenu
-% colorbar
-% saveas(h, [outDir '/' fname '_' num2str(res(1)) 'x' num2str(res(2)) '_error.fig']);
 

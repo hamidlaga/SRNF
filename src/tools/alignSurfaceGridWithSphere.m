@@ -21,7 +21,7 @@ surface(F(:,:,1),F(:,:,2),F(:,:,3));
 axis equal;
 cameramenu;
 
-cd([surfaceCodeDir 'src/ClosedIan']);  % 'Matlab\ClosedIan']); % 
+cd([surfaceCodeDir 'Mex/ClosedIan']);  % 'Matlab\ClosedIan']); % 
 % addpath([surfaceCodeDir 'Matlab/ClosedIan']);
 % addpath([surfaceCodeDir 'Matlab/Closed']);
 

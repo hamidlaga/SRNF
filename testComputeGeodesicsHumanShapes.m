@@ -11,21 +11,18 @@ configure_paths;
 
 mysmall = 0.01;
 
-% cylinders
-dataDir = '/Users/hamidlaga/Dropbox/Home/Data/4DData/DFAUST/RegistrationsParameterized_multiRes/';
-outDir  = './results/geodesics/'; 
-homeDir        = '/Users/hamidlaga/Dropbox/Home/Applications/3DShapeStatistics/code/';
-surfaceCodeDir = [homeDir 'Surface/'];
+dataDir = './sample_surfaces/';
+outDir  = './output/'; 
+homeDir        = [pwd '/']; 
+surfaceCodeDir = [homeDir '../Surface/'];  %% Specify the path to Surface code
 currDir        = pwd;
 
 %% The shapes
-fname1 = '50002_chicken_wings/00000';
-fname2 = '50002_hips/00000'; 
-% fname  = [fname1 '_' fname2]; 
+fname1 = 'dfaust_0';
+fname2 = 'dfaust_1'; 
 
 load([dataDir fname1, '.mat'], 'multiResM');  multiResM1 = multiResM;
 load([dataDir fname2, '.mat'], 'multiResM');  multiResM2 = multiResM;
-
 
 % normalize for translation
 multiResM1 = normalize_translation_multiresSurf(multiResM1);
@@ -63,7 +60,7 @@ for i=1:size(multiResM1, 1),
 end
 
 %% the resolutions
-RES = [50, 50]; 
+RES = [64, 64]; 
 
 %% The scales (frequencies)
 LLS{1} = [36]; 
@@ -155,7 +152,7 @@ for j=1:nsteps
     
         q1  = squeeze(Q1_multires{i});
         q2  = squeeze(Q2_multires{i});
-        Q{i} = interpolateSRNF(q1, q2, s); %   q1*(1-s) + q2*s;  %       
+        Q{i} = q1*(1-s) + q2*s;  %    interpolateSRNF(q1, q2, s); %       
         
     end
     
@@ -169,7 +166,7 @@ params.myInner  = @innerS2;
 params.cutoff   = 1e-6;
 params.stepsize = .1; %.5;       %0.01;
 params.itermax  = 15000; 
-params.basis_type = 1; % 2 for PCA, 1 for harmonics
+params.basis_type = 2; % 2 for PCA, 1 for harmonics
 
 geodesicPath{1}      = M1_multires;
 geodesicPath{nsteps} = M2_multires;
@@ -201,21 +198,12 @@ for ii = 2:nsteps-1,
     res = RES(1, :);
     
     if params.basis_type == 1, % harmonic basis
-        load( ['HarmonicBasis/harmonic_basis_Res' num2str(res(1)) '_L' num2str(l) '.mat'], 'B');  
+        load( [homeDir '/HarmonicBasis/harmonic_basis_Res' num2str(res(1)) '_L' num2str(l) '.mat'], 'B');  
         [cn, f0n] = reconstruct_surfaceR3(f0, params.myInner, B, res);
     else % PCA basis
-        load( ['PCABasis_HumanShapes/PCABasisHuman_Res' num2str(res(1)) '.mat'], 'B', 'Mu');  
+        load( [homeDir 'PCABasis/DFAUST_PCA_with_derivatives_' num2str(res(1)) '.mat'], 'B', 'Mu');  
         [cn, f0n] = reconstruct_surfaceR3_PCA(f0, B, res, Mu);
         clear('Mu');
-        
-%         figure, 
-%         dispSurfR3(f0, res, 3); 
-%         axis on;
-%         
-%         figure, 
-%         dispSurfR3(f0n, res, 3); 
-%         axis on;
-%         pause
     end
     clear('B');
     
@@ -240,9 +228,6 @@ for ii = 2:nsteps-1,
         res= RES(i, :);
 
         %% visualize the reconstructed surface
-%         M4 = reshape(f4,[d,res]);
-%         M4 = permute(M4,[2,3,1]);
-
         f0 = f0_multires{i};  
         h1 = figure(100); clf; hold on;
         dispSurfR3(f0, res, 3); % M1_multires{nres}
