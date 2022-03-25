@@ -1,11 +1,8 @@
 %% README
-%% Geodesic shooting for the human shapes
 % This script demonstrates how to compute geodesics between human body shapes using SRNF inversion procedure.
 % This example uses PCA basis computed on a subset of the [DFAUST](https://dfaust.is.tue.mpg.de/) dataset.
 %
 % It can also be used for deformation transfer using geodesic shooting (see the detailed description below).  
-%
-% This code uses spherical grids of 128 x 128.
 %
 % REQUIREMENTS
 % - PCA basis of the class of shapes. This example uses PCA basis computed on a subset of the [DFAUST](https://dfaust.is.tue.mpg.de/) dataset.  
@@ -122,7 +119,7 @@ params.toSave = 1;      % set it to 1 if you want to save the computed gedoesics
 
 params.cn = [];         % empty for a sphere - otherwise, specify the harmonic rep of the initial surface
 
-params.nsteps = 5;      % Number of samples along the geodesic
+params.nsteps = 5;             % Number of samples along the geodesic
 
 %% Load two registered surfaces (fname1 and fname2)
 load([dataDir fname1, '.mat'], 'M' );  

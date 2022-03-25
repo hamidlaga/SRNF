@@ -111,7 +111,7 @@ params.d        = 3;
 params.myInner  = @innerS2;
 params.cutoff   = 1e-6;
 params.stepsize = .1;       % 0.01;
-params.itermax  =  5000; % 10000;     % Max No. of iterations
+params.itermax  =  5000;    % Max No. of iterations
 
 params.initMode = 1;        % 0 - Initialize the inversion using a sphere
                             % 1 - Initialize the inversion using a point on
@@ -161,14 +161,12 @@ subpos = get(hsub,'position');
 subpos(1:2) = subpos(1:2) + 75; 
 subpos(3:4) = 100; 
 uicontrol ('Style','text', 'String', 'Original Surface, with harmonic basis','FontSize', 8, 'Position', subpos);
-  %   title('Original Surface, with harmonic bases');
 dispSurface(f_hb); 
 
 i  = params.nres;
 res= params.RES(i, :);
 
 % Original Surface
-% h1 = figure(200); clf; title('Original Surface');
 hsub = subplot(1, 4, 2);
 subpos = get(hsub,'position'); 
 subpos(1:2) = subpos(1:2) + 75; subpos(1) = subpos(1) + 100;
