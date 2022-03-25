@@ -56,5 +56,5 @@ end
 %% Now start the inversion process (the input is Q_multires and params.RES, the resolutions)
 cn = params.cn;    % initial surface
 tic
-[f_reconstructed_multires, cn, E, dE] = multiresSRNFInversion(Q_multires,  cn, params); %% params.RES(1:params.nres, :), LLS,
+[f_reconstructed_multires, cn, E, dE] = multiresSRNFInversion(Q_multires,  cn, params); 
 toc

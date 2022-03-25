@@ -55,9 +55,6 @@ for i=1:nres,
             q2 = permute(q0, [2,3,1]);
         else
             % PCA basis
-            
-            % load( ['PCABasis_HumanShapes/PCABasisHuman_Res' num2str(res(1)) '.mat']); 
-            % load( ['PCABasis_michael/PCABasisHuman_Res' num2str(res(1)) '.mat']); 
             load( [params.PCA_BASIS_FNAME_PREFIX num2str(res(1)) '.mat']); 
             
             npca_basis =  min(params.npca_basis, size(B, 3));
@@ -82,9 +79,7 @@ for i=1:nres,
             Bv = Bnv;            
             
             clear('Muu');
-            clear('Muv');
-            
-            % cn = [1; cn];            
+            clear('Muv');          
             
             %% align q0 with the mean shape
             sinTheta  = genSinPhi(Theta, mysmall);
@@ -98,51 +93,21 @@ for i=1:nres,
     
             currDir = pwd;
             
-            cd([surfaceCodeDir   'src/ClosedIan']); % 'Mex\ClosedIan']);  % 'Matlab\ClosedIan']); % 
-            % addpath([surfaceCodeDir 'Matlab/ClosedIan']);
-            % addpath([surfaceCodeDir 'Matlab/Closed']);
+            cd([surfaceCodeDir   'Matlab/ClosedIan']); % 'Mex\ClosedIan']);  % 'Matlab\ClosedIan']); % 
+            addpath([surfaceCodeDir 'Matlab/ClosedIan']);
+            addpath([surfaceCodeDir 'Matlab/Closed']);
 
-            
-%             M = reshape(Mu, [3, res]); clear('Mu');
-%             M = permute(M,[2,3,1]);
-%             figure(1), clf;
-%             surface(squeeze(M(:,:, 1)), squeeze(M(:,:, 2)), squeeze(M(:,:, 3)));
-%             axis equal;
-%             cameramenu
-%             pause
-            
-            % pause
-%             [Snorm2n,A2n,multfact2n,sqrtmultfact2n] = area_surf_closed(M);
-%             q1 = surface_to_q(Snorm2n,sqrtmultfact2n);
-
-            % reshape q0
             q2 = reshape(q0, [3, res]);
             q2 = permute(q2,[2,3,1]);
             
             % Rotation that aligns q2 to q1
-%             size(q1)
-%             size(q2)
-%             size(Theta)
-%             pause
             O  = optimal_rot_surf_closed(q1, q2, Theta);    
             O  = real(O);
             cd(currDir);
         end
             
         % Align q2 to q1 (either sphere or mean shape)
-        % disp(O)
         q0 = rotate3D(q0, O);
-%         hold on;
-%         F0n = rotate3D(F0, O);
-%         F0n = reshape(F0n, [3, res]); 
-%         M = permute(F0n,[2,3,1]);
-%         surface(squeeze(M(:,:, 1)), squeeze(M(:,:, 2)), squeeze(M(:,:, 3)));
-%         pause
-%         % reshape q2n to q0
-%         q0 = mySurf(q2n, 0);
-            
-
-        
         % 1. inverse mapping, codes in cpp new
         if ~isempty(cn),
             % padding cn with zeros
@@ -157,8 +122,6 @@ for i=1:nres,
         [f4,cn,E4,dE4,C4,H4] = ...
             invQnew(q0, B, Bu, Bv, res, stepsize, cutoff, itermax, cn);       
            
-        
-
        % toc
         clear B;
         clear Bu;
@@ -166,36 +129,17 @@ for i=1:nres,
     end 
     
     %% I am going to visualize how the surface has eveolved over the optimization iterations
-%    [fu_nn,fv_nn] = partialF(f4,sinPhi,d,N,res);
-%    [Qf,~,~,~]    = map2qnew(fu_nn,fv_nn,N);
-%     
-%     j   = 1;
-%     c_n = C4(:, j);
-%     f_n = genSurfR3(c_n,B);
-    
     f4_multires{i} = rotate3D(f4, O');
     cn_multires{i} = cn;
     
-    % disp(E4(1), E4(end)
     E{i} = E4;
     if nargout == 4,
         dE{i} = dE4;
     end
-    
-%     disp('Press anykey to continue ...');
-%     pause; % (.1);
 end
-
-
-% E = E4;  % the evolution of the energy at the last res
 
 f4_multires0 = cell(nres, 1);
 for i=1:nres,
-    
-%     h1 = figure(100); clf; 
-%     dispSurfR3(f4_multires{i}, params.RES(i, :), 3);  cameramenu
-% 
-%     pause
     f4_multires0{i} = permute(reshape( f4_multires{i}, [d, params.RES(i, 1), params.RES(i, 2)]), [2, 3, 1]);
 end
 f4_multires = f4_multires0;
