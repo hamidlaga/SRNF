@@ -113,7 +113,7 @@ params.cutoff   = 1e-6;
 params.stepsize = .1;       % 0.01;
 params.itermax  =  5000;    % Max No. of iterations
 
-params.initMode = 1;        % 0 - Initialize the inversion using a sphere
+params.initMode = 0;        % 0 - Initialize the inversion using a sphere
                             % 1 - Initialize the inversion using a point on
                             %     the linear path
                             % 2 - Initialize the inversion using the
