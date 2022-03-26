@@ -61,8 +61,13 @@ You may need more if you are dealing with high resolution surfaces.
 ### test_inverseQ_PCABasis.m 
 This script shows how to invert SRNF maps when PCA basis is available for such class of shapes. Note that this one is class-specific.
 
-### testComputeGeodesicsHumanShapes.m
+### testGeodesicShooting.m
+This script shows how to compute the geodesic between a pair of spatially registered generic surfaces. It uses harmonic basis. The script can also be used for deformation transfer.
+
+### testGeodesicShootingHumanShapes.m
 This script shows how to compute the geodesic between a pair of spatially registered surfaces when PCA basis are available for that class of shapes. Note that this one is class-specific.  In this distribution, we provide PCA basis generated on a subset of the [DFAUST](https://dfaust.is.tue.mpg.de/) dataset.
+
+The script can also be used for deformation transfer.
 
 ### testGenerateHarmonicBasis.m
 This script shows how to generate spherical harmonic basis and their derivatives.
